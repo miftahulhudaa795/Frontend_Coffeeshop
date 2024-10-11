@@ -9,7 +9,7 @@ const Profil = () => {
   const [isLoadingImg, setIsLoadingImg] = useState(false)
   const getProfile = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/user/profile`, {
+      const response = await axios.get(`${process.env.REACT_APP_HOST}/user/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -24,24 +24,6 @@ const Profil = () => {
     getProfile();
   });
 
-    
-  const putProfile = async () => {
-    setIsLoadingImg(true)
-    try {
-      const response = await axios.put(`http://localhost:5000/user/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setIsLoadingImg(response?.data?.dataUser);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    putProfile();
-  });
 
   return (
     <div>
@@ -57,7 +39,7 @@ const Profil = () => {
                     alt="Foto Profil"
                     className="w-3/4 rounded-full object-cover"/>
                 </div>
-                <div onChange={isLoadingImg?.image} className="w-10 h-10 rounded-full absolute bg-orange-950 flex items-center justify-center mr-5 mb-2 cursor-pointer">
+                <div className="w-10 h-10 rounded-full absolute bg-orange-950 flex items-center justify-center mr-5 mb-2 cursor-pointer">
                   <img src="/images/pensil.svg" alt="icon pensil" />
                 </div>
               </div>

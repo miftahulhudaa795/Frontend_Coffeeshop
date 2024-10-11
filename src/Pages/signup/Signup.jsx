@@ -16,7 +16,7 @@ const Signup = () => {
   const register = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/auth/register", {
+      const response = await axios.post(`${process.env.REACT_APP_HOST}/auth/register`, {
         email,
         password,
         phoneNumber,
