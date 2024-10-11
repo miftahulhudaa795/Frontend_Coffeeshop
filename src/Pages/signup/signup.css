@@ -1,0 +1,231 @@
+* {
+    font-family: 'poppins',sans-serif;
+    /* background: white; */
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    flex-direction: row;
+}
+
+.images-signup {
+    width: 50%;
+}
+
+.form1 {
+    width: 50%;
+}
+
+.img-signup {
+    width: 100%;
+}
+
+.top-signup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+
+}
+
+.logo-signup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-login2 {
+    background:#FFBA33;
+    padding: 12px 32px 12px 32px;
+    border-radius: 24px;
+    border: 0;
+    color: #6A4029;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.logo-signup span {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+h2 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6A4029;
+    margin-top: 50px;
+}
+
+.form-signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    gap: 10px;
+    margin-top: 50px;
+}
+
+.form-input-signup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 70%;
+    gap: 10px;
+}
+
+.input-signup {
+    width: 100%;
+    padding: 24px;
+    border: 1px solid #6A4029;
+    border-radius: 20px;
+
+}
+
+input:focus ~ label {
+    width: 100%;
+}
+
+.forgot-signup  {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+    padding-left: 12px;
+    font-weight: 600;
+    color: #6A4029;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btn-signup {
+    background-color: #FFBA33;
+    color: #6A4029;
+    width: 70%;
+    padding: 24px;
+    border-radius: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-google-signup {
+    background-color: white;
+    color: #6A4029;
+    width: 70%;
+    padding: 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: #6A4029;
+    gap: 12px;
+    box-shadow: 0px 5px 10px #b1b1b1;
+    cursor: pointer;
+}
+
+.member {
+    display: flex;
+    position: absolute;
+    height: 200px;
+    background-color: white;
+    width: 70%;
+    top: -100px;
+    left: 15%;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgb(156, 155, 155);
+    justify-content: space-between;
+    
+}
+
+.get-member {
+    width: 50%;
+    padding: 0 0 0 24px;
+}
+
+.get-member h1 {
+    width: 70%;
+    padding: 0 0 0 24px;
+}
+
+.get-member p {
+    width: 100%;
+    padding: 0 0 0 24px;
+}
+
+.btn-createnow {
+    background-color: #FFBA33;
+    box-shadow: 0 5px 10px rgb(206, 205, 205);
+    color: #6A4029;
+    height: 60px;
+    width: 250px;
+    border-radius: 24px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    margin-right: 50px;
+    margin-top: 70px;
+}
+
+.footer {
+    position: relative;
+    height: 500px;
+    background-color: #F8F8F8;
+
+    bottom: 0;
+    /* padding: 100px 0 0 200px; */
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 200px 0 0 180px;
+    align-items: flex-start;
+
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+li {
+    list-style: none;
+}
+
+li a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.footer-bawah {
+    padding: 20px;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 100px;
+    margin-right: 150px;
+}
+
+.logo-coffe {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    font-weight: 700;
+}
