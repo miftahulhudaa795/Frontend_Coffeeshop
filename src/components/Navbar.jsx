@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Navitem from './Navitem'
 
 
 const Navbar = () => {
@@ -33,6 +34,26 @@ const Navbar = () => {
     useEffect(() => {
       getProfile();
     });
+
+    const dataNav = [
+      {
+        name : "Home",
+        route : "/"
+      },
+      {
+        name : "Product",
+        route : "/product"
+      },
+      {
+        name : "You Cart",
+        route : "/cart"
+      },
+      {
+        name : "History",
+        route : "/history"
+      }
+    ]
+
   return (
     
     <div className='w-full flex items-center justify-between px-20 py-8 border-b-2'>
@@ -41,18 +62,14 @@ const Navbar = () => {
         <div className="logo font-bold text-lg">Coffeeshop</div>
         </div>
         <div className="flex items-center justify-center gap-x-10 list-none">
-            <li className='cursor-pointer hover:font-bold hover:text-yellow-950' onClick={()=>{
-                navigate('/')
-            }}>Home</li>
-            <li className='cursor-pointer hover:font-bold hover:text-yellow-950' onClick={()=>{
-                navigate('/Products')
-            }}>Product</li>
-            <li className='cursor-pointer hover:font-bold hover:text-yellow-950' onClick={()=>{
-              navigate('/cart')
-            }}>Your Cart</li>
-            <li className='cursor-pointer hover:font-bold hover:text-yellow-950' onClick={()=>{
-              navigate('/history')
-            }}>History</li>
+          {
+            dataNav.map((item, index,) => {
+              return (
+                <Navitem key={index} to={item.route} item={item.route} name={item.name}/>
+              )
+            }) 
+          } 
+        
         </div>
         {
             isLogin ?

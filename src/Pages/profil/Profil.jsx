@@ -6,7 +6,6 @@ import Footer from "../../components/Footer";
 const Profil = () => {
   const token = localStorage.getItem(`token`);
   const [profile, setProfile] = useState({});
-  const [isLoadingImg, setIsLoadingImg] = useState(false)
   const getProfile = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_HOST}/user/profile`, {
@@ -105,7 +104,7 @@ const Profil = () => {
                 <label className="text-gray-500" htmlFor="display-name">
                   Display Name :
                 </label>
-                <input
+                <input defaultValue={profile?.displayName || ""}
                   id="display-name"
                   type="text"
                   className="w-full outline-none border-b-2 border-black"
@@ -115,7 +114,7 @@ const Profil = () => {
                 <label className="text-gray-500" htmlFor="date">
                   DD/MM/YY
                 </label>
-                <input
+                <input defaultValue={profile?.dateOfBirth || ""}
                   id="date"
                   type="date"
                   className="w-full outline-none border-b-2 border-black"
@@ -125,7 +124,7 @@ const Profil = () => {
                 <label className="text-gray-500" htmlFor="firs-name">
                   First Name :
                 </label>
-                <input
+                <input defaultValue={profile?.firstName || ""}
                   id="firs-name"
                   type="text"
                   className="w-full outline-none border-b-2 border-black"
@@ -145,7 +144,7 @@ const Profil = () => {
                 <label className="text-gray-500" htmlFor="last-name">
                   Last Name :
                 </label>
-                <input
+                <input defaultValue={profile?.lastName || ""}
                   id="last-name"
                   type="text"
                   className="w-full outline-none border-b-2 border-black"
