@@ -3,14 +3,16 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
 import Promo from "../../components/Promo";
+import { useNavigate } from "react-router-dom";
 
 
 const Products = () => {
+  const navigate = useNavigate()
   const [product, setProduct] = useState([])
   const getProduct = async () => {
     
     try {
-      const response = await axios.get(`${process.env.REACT_APP_HOST}/product?orderBy=id&sortBy=DESC&limit=12&page=1`)
+      const response = await axios.get(`${process.env.REACT_APP_HOST}/product?orderBy=id&sortBy=DESC&limit=100&page=1`)
       console.log(response);
       setProduct(response?.data?.data)
     } catch (error) {
@@ -40,7 +42,7 @@ const Products = () => {
             {
               product.map((item)=>{
                 return (
-                  <div className="p-4 border shadow-lg shadow-gray-400 flex flex-col items-center justify-between py-8 gap-6 rounded-3xl">
+                  <div onClick={()=>{navigate('/details')}} className="p-4 border shadow-lg shadow-gray-400 flex flex-col items-center justify-between py-8 gap-6 rounded-3xl cursor-pointer hover:border-2 hover:border-orange-900">
                     <img className="rounded-full shadow-lg shadow-gray-400 w-3/4" src={item.image} alt="product" />
                     <div>
                       <div className="font-bold">{item.name}</div>

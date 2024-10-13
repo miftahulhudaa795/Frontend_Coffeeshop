@@ -9,6 +9,7 @@ import Products from './Pages/products/Products';
 import Profil from './Pages/profil/Profil';
 import Cart from './Pages/cart/Cart';
 import History from './Pages/history/History';
+import Details from './Pages/products/Details';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/history' element={<History/>}/>
           <Route path='/profil' element={<Profil/>}/>
+          <Route path='/details' element={<Details/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -41,8 +41,8 @@ const Navbar = () => {
         route : "/"
       },
       {
-        name : "Product",
-        route : "/product"
+        name : "Products",
+        route : "/products"
       },
       {
         name : "You Cart",
