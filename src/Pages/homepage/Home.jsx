@@ -8,36 +8,36 @@ const HomePage = () => {
       <Navbar />
 
       {/* Header */}
-      <div className="">
-        <div className="w-full flex absolute justify-center">
-          <img src="/images/background.png" alt="" />
+      <div className="mx-auto">
+        <div className="w-full flex absolute justify-center mx-auto object-cover">
+          <img className="object-conver w-full h-72 lg:h-full" src="/images/background.png" alt="" />
         </div>
 
         <div className="flex flex-row justify-between p-8">
         <div className="">
-            <div className="flex text-white flex-col text-left gap-y-4 justify-center relative px-12 py-24">
-                <h1 className="font-bold text-5xl">
+            <div className="flex text-white flex-col text-left gap-y-4 justify-center relative lg:px-12 lg:py-24">
+                <h1 className="font-bold lg:text-5xl">
                   Start Your Day with <br /> Coffee and Good Meals
                 </h1>
-                <p>
+                <p className="text-xs lg:text-lg">
                   We provide high quality beans, good taste, and healthy <br />
                   meals made by love just for you. Start your day with us <br /> for
                   a bigger smile!
                 </p>
-                <button className="btn-get rounded-2xl py-4">
+                <button className="bg-orange-500 w-full p-2 rounded-3xl lg:py-8 lg:w-60">
                   <span>Get Started</span>
                 </button>
             </div>
             </div>
-            <div className="flex relative w-[250px] h-[60px] justify-center bg-white rounded-full">
-              <div className="flex relative flex-row items-center justify-end p-4">
+            <div className="flex relative w-32 h-8 lg:w-[250px] lg:h-[60px] justify-center bg-white lg:rounded-full rounded-3xl">
+              <div className="flex relative flex-row items-center justify-end py-4 px-2 w-full gap-2">
                 <img
-                  className="flex w-[20px] h-[20px] "
+                  className="lg:flex lg:w-[20px] lg:h-[20px] h-4 inline"
                   src="/images/search.svg"
                   alt="search.svg"
                 />
                 <input
-                  className="w-full rounded-3xl p-4 outline-none"
+                  className="w-full rounded-3xl lg:p-4 outline-none py-1"
                   type="text"
                   placeholder="Search"
                 />
@@ -46,56 +46,51 @@ const HomePage = () => {
             
         </div>
       </div>
-      <div className="box">
-        <div className="isi-box">
-          <div className="icon-left">
-            <img src="/images/icon-user.svg" alt="" />
+      <div className="bg-white w-[80%] lg:h-40 relative shadow-lg py-4 rounded-xl ml-[9%] items-center">
+        <div className="flex h-full justify-between px-4 lg:px-16 items-center">
+          <div className="flex gap-2 items-center">
+            <img className="h-12 inline lg:h-20" src="/images/icon-user.svg" alt="" />
             <div className="staff">
-              <h3 className="text-xl font-bold">90+</h3>
-              <span>Staff</span>
-            </div>
-            <div className="garis">
-              <img src="/images/Vector 14.svg" alt="" />
+              <h3 className="text-sm lg:text-xl font-bold">90+</h3>
+              <span className="text-sm lg:text-lg">Staff</span>
             </div>
           </div>
-          <div className="icon-center">
-            <img src="/images/icon-location.svg" alt="" />
-            <div className="stores">
-              <h3 className="text-xl font-bold">30+</h3>
-              <span>Stores</span>
-            </div>
-            <div className="garis">
-              <img src="/images/Vector 14.svg" alt="" />
+          <div className="border-r-2"></div>
+          <div className="flex gap-2">
+            <img className="h-12 inline" src="/images/icon-location.svg" alt="" />
+            <div className="stores items-start">
+              <h3 className="text-sm font-bold">30+</h3>
+              <span className="text-sm">Stores</span>
             </div>
           </div>
-          <div className="icon-right">
-            <div className="icon-love">
-              <img className="bulat" src="/images/bulat.svg" alt="" />
+          <div className="border-r-2"> </div>
+          <div className="flex gap-2">
+            <div className="flex items-center justify-center bg-yellow-500 h-12 w-12 rounded-full">
               <img className="love" src="/images/icon-love.svg" alt="" />
             </div>
-            <div className="customers">
-              <h3 className="text-xl font-bold">800+</h3>
-              <span>Customers</span>
+            <div className="flex flex-col items-start">
+              <h3 className="text-sm font-bold">800+</h3>
+              <span className="text-sm">Customers</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Provider */}
-      <div className="container-provide">
-        <div className="img-provide">
+      <div className="flex flex-col items-center gap-4 py-8 px-16 ">
+        <div className="w-full">
           <img src="/images/image.png" alt="" />
         </div>
-        <div className="text-provide text-left">
-          <h1 className="font-bold text-3xl">
-            We Provide Good Coffee <br /> and Healthy Meals
+        <div className="flex flex-col text-left gap-4">
+          <h1 className="font-bold text-2xl">
+            We Provide Good Coffee and Healthy Meals
           </h1>
-          <p>
-            You can explore the menu that we provide with fun and <br /> have
+          <p className="text-sm">
+            You can explore the menu that we provide with fun and have
             their own taste and make your day better.
           </p>
           
-          <div className="flex flex-col text-left justify-center gap-8">
+          <div className="flex flex-col text-left text-sm justify-center gap-4">
             <div className="list">
               <img src="/images/Ceklis.svg" alt="" />
               <li>High quality beans</li>
@@ -117,15 +112,15 @@ const HomePage = () => {
       </div>
 
       {/* Here is People’s Favorite */}
-      <div className="container-people">
-        <div className="content-people">
-          <h1 className="font-bold text-3xl">Here is People’s Favorite</h1>
-          <p>
+      <div className="bg-gray-100 flex flex-col py-8 px-16 gap-4">
+        <div className="">
+          <h1 className="font-bold text-2xl">Here is People’s Favorite</h1>
+          <p className="text-sm">
             Let’s choose and have a bit taste of poeple’s favorite. It might be
             yours too!
           </p>
         </div>
-        <div className="box-people">
+        <div className=" flex flex-col gap-4">
           <div className="box-1">
             <img src="/images/Hazelnut Latte.png" alt="Hazelnut Latte" />
             <h3 className="font-bold">Hazelnut Latte</h3>
