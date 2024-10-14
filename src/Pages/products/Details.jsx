@@ -1,29 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const Details = () => {
+    const {id} = useParams()
+    const [product, setProduct] = useState(null)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
+
+    const getProductDetails = async () => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_HOST}/${id}`)
+            setProduct(response?.data?.data)
+        } catch (error) {
+            setError("Failed to fetch product details")
+        } finally {
+            setLoading(false)
+        }
+    }
+    useEffect(() => {
+        getProductDetails()
+    }, [id])
+
+    if (loading) return <div>Loading...</div>
+    if (error) return <div>{error}</div>
+    if (!product) return <div>No product found.</div>
   return (
     <div>
         <Navbar/>
         <div className=" bg-[#EFEEEE]  ">
             <div className="grid grid-cols-2 p-12 w-full ">
                 <div className=" flex flex-col items-center py-12 justify-between gap-8">
-                    <img className='rounded-full w-[300px] h-[300px] bg-orange-500' src="" alt="img" />
+                    <img className='rounded-full w-[300px] h-[300px] bg-orange-500' src={product.image} alt={product.name} />
                     <div className="flex flex-col gap-4">
-                        <label className='font-bold text-5xl' htmlFor="">COLD BREW</label>
-                        <label htmlFor="">Rp. 30.000</label>
+                        <label className='font-bold text-5xl' htmlFor="">{product.name}</label>
+                        <label htmlFor="">IDR {product.price}</label>
                     </div>
                 </div>
                 <div className=" bg-white flex flex-col items-center p-16 justify-between rounded-3xl">
                     <div className="flex flex-col text-left  gap-16 ">
                         <div className="flex flex-col gap-8 text-xl">
                             <p>Delivery only on Monday to <br/> friday at 1 - 7 pm</p>
-                            <p>Cold brewing is a method of brewing that combines ground  coffee and cool water and uses time instead of heat to extract the  flavor. It is brewed in small batches and steeped for as long as 48 hours.</p>
+                            <p>{product.description}</p>
                         </div>
                         <div className="flex flex-col items-center justify-center text-center gap-4">
                             <label className='font-bold text-xl' htmlFor="">Choose a size</label>
-                            <div className="flex flex-row gap-12">
+                            <div className="flex flex-row gap-12">{product.size}
                                 <div className="flex items-center justify-center w-[60px] h-[60px] text-2xl font-bold rounded-full bg-[#FFBA33]">R</div>
                                 <div className="flex items-center justify-center w-[60px] h-[60px] text-2xl font-bold rounded-full bg-[#FFBA33]">L</div>
                                 <div className="flex items-center justify-center w-[60px] h-[60px] text-2xl font-bold rounded-full bg-[#FFBA33]">XL</div>
