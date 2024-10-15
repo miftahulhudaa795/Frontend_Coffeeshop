@@ -73,7 +73,7 @@ const Navbar = () => {
         </div>
         {
             isLogin ?
-              <div className="flex flex-row gap-4">
+              <div className="flex flex-row gap-4 lg:order-3">
                 <img src="/images/search.svg" alt="" />
                 <img src="/images/chat.svg" alt="" />
                 <div onClick={()=> {
@@ -93,7 +93,7 @@ const Navbar = () => {
                     }
                 </div>
                 <button onClick={() => setToggleNavbar(toggleNavbar ? false : true)} className='lg:hidden block'>
-                  <img className='h-8 inline' src= {toggleNavbar ?  "/images/xmark-solid.svg": "/images/bars-solid.svg"} />
+                  <img className='h-8 inline' src= {toggleNavbar ?  "/images/xmark-solid.svg": "/images/bars-solid.svg"} alt=''/>
                 </button>
               </div> :
                 <div className="authentikasi items-center gap-x-4 hidden sm:block sm:flex order-2 sm:order-3 lg:order-2">
@@ -107,7 +107,7 @@ const Navbar = () => {
                 
         }
         <button onClick={() => setToggleNavbar(toggleNavbar ? false : true)} className='lg:hidden block order-3 sm:order-1'>
-          <img className='h-8 inline' src= {toggleNavbar ?  "/images/xmark-solid.svg": "/images/bars-solid.svg"} />
+          <img className='h-8 inline' src= {toggleNavbar ?  "/images/xmark-solid.svg": "/images/bars-solid.svg"} alt='' />
         </button>
     </div>
     <div className= {toggleNavbar ? "block" : "hidden"} >

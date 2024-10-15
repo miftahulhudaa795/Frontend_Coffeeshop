@@ -3,18 +3,18 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
 import Promo from "../../components/Promo";
-import { useNavigate } from "react-router-dom";
+import CartProduct from "../../components/CartProduct";
 
 
 const Products = () => {
-  const navigate = useNavigate()
   const [product, setProduct] = useState([])
+  const [page, setPage] =useState(1)
+
   const getProduct = async () => {
-    
     try {
-      const response = await axios.get(`${process.env.REACT_APP_HOST}/product?orderBy=id&sortBy=DESC&limit=100&page=1`)
-      console.log(response);
-      setProduct(response?.data?.data)
+      const response = await axios.get(`${process.env.REACT_APP_HOST}/product?orderBy=id&sortBy=DESC&limit=100&page=${page}`)
+      console.log({response});
+      setProduct(response.data?.data)
     } catch (error) {
       console.log(error);
       
@@ -27,9 +27,8 @@ const Products = () => {
   return (
     <div>
       <Navbar/>
-      <div className="w-full flex flex-row">
+      <div className="w-full flex items-start justify-between">
         <Promo/>
-
         <div className="flex flex-col w-full h-2/3 justify-center items-center gap-10 p-10">
             <ul className="flex  items-center text-md  text-gray-500 gap-20">
                 <li className="hover:text-orange-950 hover:font-bold hover:text-lg cursor-pointer">Favorite Product</li>
@@ -38,21 +37,13 @@ const Products = () => {
                 <li className="hover:text-orange-950 hover:font-bold hover:text-lg cursor-pointer">Foods</li>
                 <li className="hover:text-orange-950 hover:font-bold hover:text-lg cursor-pointer">Add-on</li>
             </ul>
-            <div className="grid grid-cols-4 gap-8">
-            {
-              product.map((item)=>{
-                return (
-                  <div onClick={()=>{navigate('/details')}} className="p-4 border shadow-lg shadow-gray-400 flex flex-col items-center justify-between py-8 gap-6 rounded-3xl cursor-pointer hover:border-2 hover:border-orange-900">
-                    <img className="rounded-full shadow-lg shadow-gray-400 w-3/4" src={item.image} alt="product" />
-                    <div>
-                      <div className="font-bold">{item.name}</div>
-                      <div className="font-bold"> IDR {item.price} </div>
-                      <div>Stock : {item.stock}</div>
-                    </div>
-                  </div>
-                )
-              })
-            }
+          
+            <div className="w-3/4 grid grid-cols-4 gap-8">
+              {
+                product.map((item, index) => {
+                  <CartProduct item={item} key={index} />
+                })
+              }
             </div>
         </div>
       </div>

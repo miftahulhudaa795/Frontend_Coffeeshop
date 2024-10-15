@@ -3,16 +3,18 @@ import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { formatCurrency } from '../../helpers/formatter'
 
 const Details = () => {
-    const {id} = useParams()
+    const params = useParams()
+    const id =params?.id
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
     const getProductDetails = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_HOST}/${id}`)
+            const response = await axios.get(`${process.env.REACT_APP_HOST}/product/${id}`)
             setProduct(response?.data?.data)
         } catch (error) {
             setError("Failed to fetch product details")
@@ -27,6 +29,7 @@ const Details = () => {
     if (loading) return <div>Loading...</div>
     if (error) return <div>{error}</div>
     if (!product) return <div>No product found.</div>
+
   return (
     <div>
         <Navbar/>
@@ -35,8 +38,8 @@ const Details = () => {
                 <div className=" flex flex-col items-center py-12 justify-between gap-8">
                     <img className='rounded-full w-[300px] h-[300px] bg-orange-500' src={product.image} alt={product.name} />
                     <div className="flex flex-col gap-4">
-                        <label className='font-bold text-5xl' htmlFor="">{product.name}</label>
-                        <label htmlFor="">IDR {product.price}</label>
+                        <label className='font-bold text-5xl'>{product.name}</label>
+                        <label htmlFor="">{formatCurrency(product?.price)}</label>
                     </div>
                 </div>
                 <div className=" bg-white flex flex-col items-center p-16 justify-between rounded-3xl">

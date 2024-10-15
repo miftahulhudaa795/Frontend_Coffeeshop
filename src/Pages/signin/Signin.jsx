@@ -16,7 +16,7 @@ const Signin = () => {
     setIsLoading(true);
     
     try {
-      const response = await axios.post(`${process.env.REACT_APP_HOST}/auth/login`, {
+      const response = await axios.post(`http://localhost:5000/auth/login`, {
         email,
         password,
       });
@@ -49,7 +49,7 @@ const Signin = () => {
 
     useEffect(()=>{
       isLogin && navigate('/')
-    }, [isLogin])
+    })
 
   return (
     <>

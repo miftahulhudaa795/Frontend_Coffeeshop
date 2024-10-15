@@ -24,7 +24,7 @@ function App() {
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/history' element={<History/>}/>
           <Route path='/profil' element={<Profil/>}/>
-          <Route path='/details' element={<Details/>}/>
+          <Route path='/product/:id' element={<Details/>}/>
         </Routes>
       </BrowserRouter>
     </div>

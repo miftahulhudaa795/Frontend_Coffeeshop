@@ -6,16 +6,32 @@ import Footer from "../../components/Footer";
 const Profil = () => {
   const token = localStorage.getItem(`token`);
   const [profile, setProfile] = useState({});
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+
   const getProfile = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_HOST}/user/profile`, {
+      const response = await axios.get(`http://localhost:5000/user/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setProfile(response?.data?.dataUser);
+      setProfile(response.data.dataUser);
+      setEmail(response.data.dataUser.email || "");
+      setPhoneNumber(response.data.dataUser.phoneNumber || "");
+      setAddress(response.data.dataUser.address || "");
+      setDisplayName(response.data.dataUser.displayName || "");
+      setFirstName(response.data.dataUser.firstName || "");
+      setLastName(response.data.dataUser.lastName || "");
+      setDateOfBirth(response.data.dataUser.dateOfBirth || "");
     } catch (error) {
       console.log(error);
+      // Handle error state here
     }
   };
 
@@ -23,6 +39,29 @@ const Profil = () => {
     getProfile();
   });
 
+  const handleUpdateProfile = async () => {
+    try {
+      const response = await axios.put(`http://localhost:5000/user/profile`, {
+        email,
+        phoneNumber,
+        address,
+        displayName,
+        firstName,
+        lastName,
+        dateOfBirth,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProfile(response.data.dataUser);
+      
+      console.log("Profile updated successfully!");
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
 
   return (
     <div>
@@ -60,7 +99,8 @@ const Profil = () => {
                   Email Address :
                 </label>
                 <input
-                  defaultValue={profile?.email || ""}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   id="email-address"
                   type="text"
                   className="w-full outline-none border-b-2 border-black"
@@ -71,7 +111,8 @@ const Profil = () => {
                   Mobile Number :
                 </label>
                 <input
-                  defaultValue={profile?.phoneNumber || ""}
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                   id="mobile-number"
                   type="text"
                   className="w-full outline-none border-b-2 border-black"
@@ -81,7 +122,9 @@ const Profil = () => {
                 <label className="text-gray-500" htmlFor="delivery-address">
                   Delivery Address :
                 </label>
-                <input defaultValue={profile?.address || ""}
+                <input 
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   id="delivery-address"
                   type="text"
                   className="w-full outline-none border-b-2 border-black"
@@ -104,7 +147,9 @@ const Profil = () => {
                 <label className="text-gray-500" htmlFor="display-name">
                   Display Name :
                 </label>
-                <input defaultValue={profile?.displayName || ""}
+                <input 
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
                   id="display-name"
                   type="text"
                   className="w-full outline-none border-b-2 border-black"
@@ -114,7 +159,9 @@ const Profil = () => {
                 <label className="text-gray-500" htmlFor="date">
                   DD/MM/YY
                 </label>
-                <input defaultValue={profile?.dateOfBirth || ""}
+                <input
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
                   id="date"
                   type="date"
                   className="w-full outline-none border-b-2 border-black"
@@ -124,7 +171,9 @@ const Profil = () => {
                 <label className="text-gray-500" htmlFor="firs-name">
                   First Name :
                 </label>
-                <input defaultValue={profile?.firstName || ""}
+                <input
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   id="firs-name"
                   type="text"
                   className="w-full outline-none border-b-2 border-black"
@@ -144,7 +193,9 @@ const Profil = () => {
                 <label className="text-gray-500" htmlFor="last-name">
                   Last Name :
                 </label>
-                <input defaultValue={profile?.lastName || ""}
+                <input
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   id="last-name"
                   type="text"
                   className="w-full outline-none border-b-2 border-black"
@@ -155,7 +206,7 @@ const Profil = () => {
           </div>
           <div className="flex flex-col items-center justify-center gap-4">
             <div className="flex flex-col items-center justify-center gap-4">
-              <button className="w-full md:w-full lg:w-[330px] h-[60px] bg-[#6A4029] rounded-[20px] text-white font-bold">
+              <button onClick={handleUpdateProfile} className="w-full md:w-full lg:w-[330px] h-[60px] bg-[#6A4029] rounded-[20px] text-white font-bold">
                 Save Change
               </button>
               <button className="w-full md:w-full lg:w-[330px] h-[60px] bg-[#FFBA33] rounded-[20px] text-[#6A4029] font-bold">
