@@ -16,7 +16,7 @@ const Signin = () => {
     setIsLoading(true);
     
     try {
-      const response = await axios.post(`${process.env.RAECT_APP_HOST}/auth/login`, {
+      const response = await axios.post(`${process.env.REACT_APP_HOST}/auth/login`, {
         email,
         password,
       });
