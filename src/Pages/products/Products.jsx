@@ -27,7 +27,7 @@ const Products = () => {
   return (
     <div>
       <Navbar/>
-      <div className="w-full flex items-start justify-between">
+      <div className="w-full flex ">
         <Promo/>
         <div className="flex flex-col w-full h-2/3 justify-center items-center gap-10 p-10">
             <ul className="flex  items-center text-md  text-gray-500 gap-20">
@@ -38,10 +38,10 @@ const Products = () => {
                 <li className="hover:text-orange-950 hover:font-bold hover:text-lg cursor-pointer">Add-on</li>
             </ul>
           
-            <div className="w-3/4 grid grid-cols-4 gap-8">
+            <div className="grid grid-cols-4 gap-4">
               {
                 product.map((item, index) => {
-                  <CartProduct item={item} key={index} />
+                  return <CartProduct item={item} key={index} />
                 })
               }
             </div>

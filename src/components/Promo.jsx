@@ -20,7 +20,7 @@ const Promo = () => {
 
   return (
     <>
-      <div className="flex flex-col w-2/4 justify-between items-center py-50 gap-8 border-r-2 pb-28">
+      <div className="flex flex-col w-2/4 justify-between items-center py-50 gap-8 border-r-2 ">
             <div className='relative'>
               <h1 className="flex flex-col text-2xl font-bold text-red-950 py-10">Promo for you</h1>
               <span className="">Coupons will be updated every weeks. <br/> Check them out!</span>

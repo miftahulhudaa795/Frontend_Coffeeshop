@@ -16,7 +16,7 @@ const Profil = () => {
 
   const getProfile = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/user/profile`, {
+      const response = await axios.get(`${process.env.REACT_APP_HOST}/user/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -31,7 +31,6 @@ const Profil = () => {
       setDateOfBirth(response.data.dataUser.dateOfBirth || "");
     } catch (error) {
       console.log(error);
-      // Handle error state here
     }
   };
 
@@ -41,7 +40,7 @@ const Profil = () => {
 
   const handleUpdateProfile = async () => {
     try {
-      const response = await axios.put(`http://localhost:5000/user/profile`, {
+      const response = await axios.put(`${process.env.REACT_APP_HOST}/user/profile`, {
         email,
         phoneNumber,
         address,
