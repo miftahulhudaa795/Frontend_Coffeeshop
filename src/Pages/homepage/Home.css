@@ -641,7 +641,7 @@ li {
     transform: rotate(180deg);
 }
 
-.promo {
+.promo-home {
     display: flex;
     flex-direction: row;
     position: relative;

@@ -10,22 +10,25 @@ import Profil from './Pages/profil/Profil';
 import Cart from './Pages/cart/Cart';
 import History from './Pages/history/History';
 import Details from './Pages/products/Details';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<HomePage/>}/>
-          <Route path='/signin' element={<Signin/>}/>
-          <Route path='/signup' element={<Signup/>}/>
-          <Route path='/forgot-password' element={<ForgotPassword/>}/>
-          <Route path='/products' element={<Products/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-          <Route path='/history' element={<History/>}/>
-          <Route path='/profil' element={<Profil/>}/>
-          <Route path='/product/:id' element={<Details/>}/>
-        </Routes>
+        <CartProvider>
+          <Routes>
+            <Route path='/' element={<HomePage/>}/>
+            <Route path='/signin' element={<Signin/>}/>
+            <Route path='/signup' element={<Signup/>}/>
+            <Route path='/forgot-password' element={<ForgotPassword/>}/>
+            <Route path='/products' element={<Products/>}/>
+            <Route path='/history' element={<History/>}/>
+            <Route path='/profil' element={<Profil/>}/>
+            <Route path='/cart' element={<Cart/>}/>
+            <Route path='/product/:id' element={<Details/>}/>
+          </Routes>
+        </CartProvider>
       </BrowserRouter>
     </div>
   );

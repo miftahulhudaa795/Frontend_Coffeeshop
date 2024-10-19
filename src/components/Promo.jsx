@@ -20,7 +20,7 @@ const Promo = () => {
 
   return (
     <>
-      <div className="flex flex-col w-2/4 justify-between items-center py-50 gap-8 border-r-2 ">
+      <div className="flex flex-col w-2/4 lg:h-[1240px] justify-between items-center gap-8 border-r-2 pb-56 ">
             <div className='relative'>
               <h1 className="flex flex-col text-2xl font-bold text-red-950 py-10">Promo for you</h1>
               <span className="">Coupons will be updated every weeks. <br/> Check them out!</span>
@@ -30,10 +30,10 @@ const Promo = () => {
                   promo.map((item, index)=>{
                     return (
                       <div className='flex flex-col items-center'>
-                      <div className="top-52 mt-24 flex flex-col  absolute justify-center items-center gap-8 w-[284px] h-[472px] rounded-3xl bg-red-500 py-16">
+                      <div className="top-52 mt-24 flex flex-col  absolute justify-center items-center gap-8 w-[284px] h-[472px] rounded-3xl bg-red-500">
                         <div key={index[0]} className='flex flex-col gap-8 items-center'>
                             <div className='flex flex-col gap-4 items-center'>
-                              <img className="rounded-full shadow-lg shadow-gray-400 w-3/6" src={item.image} alt='' />
+                              <img className="rounded-full shadow-2xl w-3/4" src={item.image} alt='' />
                               <div className="flex flex-col  text-2xl font-bold"> {item.productName} </div>
                               <div className="flex flex-col "> {item.description} </div>
                             </div>
@@ -80,11 +80,12 @@ const Promo = () => {
                     )
                   })
                 }
+                
             </div>
         
-          <div className="flex flex-col items-center gap-8">
+          <div className="flex flex-col items-center gap-24">
             <div className="flex  w-[284px] justify-center items-center bg-orange-950 rounded-3xl text-white py-4 font-bold">Apply Coupon</div>
-            <div className="flex flex-col items-start justify-center">
+            <div className="flex flex-col items-start justify-center gap-2">
               <h1 className="font-bold">Terms and Condition</h1>
               <li>1. You can only apply 1 coupon per day</li>
               <li>2. It only for dine in</li>

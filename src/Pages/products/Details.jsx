@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { formatCurrency } from '../../helpers/formatter'
 import { RiLoader2Fill } from 'react-icons/ri'
+import { CartContext } from '../../context/CartContext'
+import Swal from 'sweetalert2'
 
 const Details = () => {
     const params = useParams()
     const id =params?.id
     const [product, setProduct] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    const { addToCart } = useContext(CartContext)
+    const [count, setCount] = useState(1)
+    const [deliveryTime, setDeliveryTime] = useState('')
+    const navigate = useNavigate()
 
     const getProductDetails = async () => {
         setIsLoading(true)
@@ -22,10 +28,36 @@ const Details = () => {
         }
         setIsLoading(false)
     }
+
+    const handleAddToCart = () => {
+        if (product) {
+            const newCartItem = {
+                ...product,
+                quantity: 1,
+                size: 'L', 
+            }
+            addToCart(newCartItem)
+            Swal.fire({
+                title: "Success",
+                text: 'Product added to cart!',
+                icon: "success",
+            })
+        }
+    }
+
+    const handleAskStaff = () => {
+        alert('Redirecting to customer service...')
+    }
+
+    const handleCheckout = () => {
+        navigate('/cart') 
+    }
+
     useEffect(() => {
         getProductDetails()
     }, [])
 
+  
    
   return (
     <div>
@@ -58,8 +90,8 @@ const Details = () => {
                             </div>
                         </div>
                         <div className=" flex flex-col gap-4 items-center py-8">
-                            <button className='w-[388px] h-[85px] bg-orange-950 rounded-3xl text-white font-bold text-xl'>Add to Cart</button>
-                            <button className='w-[388px] h-[85px] bg-[#FFBA33] rounded-3xl font-bold text-xl '>Ask a Staff</button>
+                            <button onClick={handleAddToCart} className='w-[388px] h-[85px] bg-orange-950 rounded-3xl text-white font-bold text-xl'>Add to Cart</button>
+                            <button onClick={handleAskStaff} className='w-[388px] h-[85px] bg-[#FFBA33] rounded-3xl font-bold text-xl '>Ask a Staff</button>
                         </div>
                         <div className=" flex flex-col justify-between py-8">
                             <div className="flex flex-col items-center text-center gap-8">
@@ -71,7 +103,9 @@ const Details = () => {
                                 </div>
                                 <div className="flex flex-row gap-4">
                                     <label className='text-lg' htmlFor="">Set time :</label>
-                                    <input className='w-[292.01px] outline-none bg-[#EFEEEE] border-b-2 border-[#9F9F9F]' type="text" placeholder='Enter the time you’ll arrived' />
+                                    <input className='w-[292.01px] outline-none bg-[#EFEEEE] border-b-2 border-[#9F9F9F]' type="text" placeholder='Enter the time you’ll arrived'
+                                    value={deliveryTime}
+                                    onChange={(e) => setDeliveryTime(e.target.value)} />
                                 </div>
                             </div>
                         </div>
@@ -87,12 +121,16 @@ const Details = () => {
                                 </div>
                             </div>
                             <div className="flex flex-row gap-8 items-center justify-center">
-                                <div className="flex items-center justify-center bg-orange-500 rounded-full font-bold text-lg w-[40px] h-[40px] ">-</div>
-                                <label className='font-bold text-2xl' htmlFor="">2</label>
-                                <div className="flex items-center justify-center bg-orange-500 rounded-full font-bold text-lg w-[40px] h-[40px] ">+</div>
+                                <div onClick={()=>{
+                                    count > 1 && setCount(count - 1)
+                                }} className="flex items-center justify-center border-2 border-gray-500 hover:border-none hover:bg-orange-500 rounded-full font-bold text-lg w-[40px] h-[40px] cursor-pointer  ">-</div>
+                                <div className='font-bold text-2xl'>{count}</div>
+                                <div onClick={()=>{
+                                    setCount(count + 1)
+                                }} className="flex items-center justify-center border-2 border-gray-500 hover:border-none hover:bg-orange-500 rounded-full font-bold text-lg w-[40px] h-[40px] cursor-pointer ">+</div>
                             </div>
                         </div>
-                        <div className="flex items-center justify-center h-full w-[250px] rounded-3xl shadow-lg bg-orange-500 font-bold text-2xl">CHECKOUT</div>
+                        <div onClick={handleCheckout} className="flex items-center justify-center h-full w-[250px] rounded-3xl shadow-lg bg-orange-500 font-bold text-2xl cursor-pointer">CHECKOUT</div>
                     </div>
                 </div>
         }

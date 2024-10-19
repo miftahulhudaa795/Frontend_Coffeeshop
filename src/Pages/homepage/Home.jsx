@@ -77,7 +77,7 @@ const HomePage = () => {
       </div>
 
       {/* Provider */}
-      <div className="flex flex-col items-center gap-4 py-8 px-16 ">
+      <div className="flex flex-col lg:flex-row items-center gap-4 py-8 px-16 ">
         <div className="w-full">
           <img src="/images/image.png" alt="" />
         </div>
@@ -120,7 +120,7 @@ const HomePage = () => {
             yours too!
           </p>
         </div>
-        <div className=" flex flex-col gap-4">
+        <div className=" flex flex-col lg:flex-row justify-between p-4 gap-4">
           <div className="box-1">
             <img src="/images/Hazelnut Latte.png" alt="Hazelnut Latte" />
             <h3 className="font-bold">Hazelnut Latte</h3>
@@ -292,7 +292,7 @@ const HomePage = () => {
       </div>
 
       {/* Promo */}
-      <div className="promo">
+      <div className="promo-home">
         <div className="content-promo">
           <div className="text-promo">
             <h1 className="font-bold text-3xl">
