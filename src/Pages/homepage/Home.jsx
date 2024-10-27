@@ -46,7 +46,7 @@ const HomePage = () => {
             
         </div>
       </div>
-      <div className="bg-white w-[80%] lg:h-40 relative shadow-lg py-4 rounded-xl ml-[9%] items-center">
+      <div className="bg-white w-[80%] lg:h-40 relative shadow-lg py-4 rounded-xl ml-[9%] items-center mt-4">
         <div className="flex h-full justify-between px-4 lg:px-16 items-center">
           <div className="flex gap-2 items-center">
             <img className="h-12 inline lg:h-20" src="/images/icon-user.svg" alt="" />
@@ -190,21 +190,31 @@ const HomePage = () => {
       {/* Partner */}
       <div className="container-partner">
         <h1 className="font-bold text-3xl">Our Partner</h1>
-        <div className="partner">
-          <div className="content-partner">
-            <div className="logo-partner">
-              <img src="/images/netfilx.svg" alt="netfilx" />
-              <img src="/images/reddit.svg" alt="reddit" />
-              <img src="/images/amazon.svg" alt="amazon" />
-              <img src="/images/discord.svg" alt="discord" />
-              <img src="/images/spotify.svg" alt="spotify" />
+        <div className="lg:partner items-center">
+          <div className=";lg:content-partner justify-between items-center">
+            <div className="lg:logo-partner grid grid-cols-2 items-center justify-center p-8 gap-x-8 gap-y-4">
+              <div className="w-full items-center flex">
+                <img className="" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="netfilx" />
+              </div>
+              <div className="w-full justify-center">
+                <img className=" " src="https://cdn.worldvectorlogo.com/logos/reddit-1.svg" alt="reddit" />
+              </div>
+              <div className="w-full">
+                <img className="" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="amazon" />
+              </div>
+              <div className="w-full">
+                <img className="" src="https://cdn.worldvectorlogo.com/logos/discord-logo-color-wordmark-1.svg" alt="discord" />
+              </div>
+              <div className="w-full">
+                <img className="" src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Slider */}
-      <div className="container-slider">
+      <div className="lg:container-slider">
         <div className="judul-slider">
           <h1 className="font-bold text-3xl">
             Loved by Thousands of <br /> Happy Customer
@@ -215,12 +225,12 @@ const HomePage = () => {
           </p>
         </div>
 
-        <div className="box-slider">
+        <div className="lg:box-slider flex flex-col gap-4 items-center">
           <div className="box-slider-1">
             <div className="nama-1">
               <img src="/images/Viezh Robert.png" alt="" />
               <div className="nama-viezh-robert">
-                <div className="robert">
+                <div className="robert text-left">
                   <span className="viezh-robert">Viezh Robert</span>
                   <span className="warsaw">Warsaw, Poland</span>
                 </div>
@@ -241,7 +251,7 @@ const HomePage = () => {
             <div className="nama-1">
               <img src="/images/Yessica Christy.png" alt="" />
               <div className="nama-viezh-robert">
-                <div className="robert">
+                <div className="robert text-left">
                   <span className="viezh-robert">Yessica Christy</span>
                   <span className="warsaw">Shanxi, China</span>
                 </div>
@@ -261,7 +271,7 @@ const HomePage = () => {
             <div className="nama-1">
               <img src="/images/Kim Young Jou.png" alt="" />
               <div className="nama-viezh-robert">
-                <div className="robert2">
+                <div className="robert2 text-left flex flex-col">
                   <span className="viezh-robert">Kim Young Jou</span>
                   <span className="warsaw">Seoul, South Korea</span>
                 </div>
@@ -292,9 +302,9 @@ const HomePage = () => {
       </div>
 
       {/* Promo */}
-      <div className="promo-home">
-        <div className="content-promo">
-          <div className="text-promo">
+      <div className="lg:promo-home bg-white w-[78%] ml-[11%] rounded-xl shadow-md mt-32 relative">
+        <div className="lg:content-promo">
+          <div className="lg:text-promo">
             <h1 className="font-bold text-3xl">
               Check our promo <br /> today!
             </h1>

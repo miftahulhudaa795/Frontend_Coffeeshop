@@ -9,10 +9,12 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
   const navigate = useNavigate();
 
-  const login = async () => {
+  const login = async (e) => {
+    e.preventDefault()
     setIsLoading(true);
     
     try {
@@ -76,7 +78,7 @@ const Signin = () => {
           <h2 className="font-bold text-2xl mb-10">Login</h2>
 
           <div className="flex flex-col">
-            <div className="flex flex-col items-center gap-y-24">
+            <div onSubmit={login} className="flex flex-col items-center gap-y-24">
               <div className="form-input">
                 <label className="font-bold" for="">
                   Email Address :
@@ -99,15 +101,28 @@ const Signin = () => {
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
-                  type="password"
-                  placeholder="Enter your password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password" required
                 />
+              </div>
+              <div className="flex items-start w-[70%]">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="show-password"
+                    checked={showPassword}
+                    onChange={() => setShowPassword(!showPassword)} // Toggle password visibility
+                  />
+                  <label htmlFor="show-password" className="ml-2 font-medium">
+                    Show Password
+                  </label>
+                </div>
               </div>
             </div>
 
             <div onClick={() => {
               navigate('/forgot-password')
-            }} className="flex text-left font-bold px-2 py-20 cursor-pointer ml-24 hover:underline">
+            }} className="flex text-left font-bold px-2 py-4 cursor-pointer ml-24 hover:underline">
               Forgot Password?
             </div>
 

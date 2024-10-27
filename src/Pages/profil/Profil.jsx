@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
 import Footer from "../../components/Footer";
+import Swal from "sweetalert2";
 
 const Profil = () => {
   const token = localStorage.getItem(`token`);
@@ -13,6 +14,8 @@ const Profil = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false)
+  const [isEditProfile, setIsEditProfile] = useState(false)
 
   const getProfile = async () => {
     try {
@@ -39,7 +42,9 @@ const Profil = () => {
   });
 
   const handleUpdateProfile = async () => {
+    if (!isEditProfile) return;
     try {
+      setIsUpdating(true)
       const response = await axios.put(`${process.env.REACT_APP_HOST}/user/profile`, {
         email,
         phoneNumber,
@@ -58,9 +63,14 @@ const Profil = () => {
       console.log("Profile updated successfully!");
     } catch (error) {
       console.log(error);
-      
     }
+    setIsUpdating(false)
+    setIsEditProfile(false)
   }
+
+  const handleEditClick = () => {
+    setIsEditProfile(true); // Enable form editing
+  };
 
   return (
     <div>
@@ -76,7 +86,7 @@ const Profil = () => {
                     alt="Foto Profil"
                     className="w-3/4 rounded-full object-cover"/>
                 </div>
-                <div className="w-10 h-10 rounded-full absolute bg-orange-950 flex items-center justify-center mr-5 mb-2 cursor-pointer">
+                <div onClick={handleEditClick} className="w-10 h-10 rounded-full absolute bg-orange-950 flex items-center justify-center mr-5 mb-2 cursor-pointer">
                   <img src="/images/pensil.svg" alt="icon pensil" />
                 </div>
               </div>
@@ -88,7 +98,7 @@ const Profil = () => {
           <div className="w-full md:w-full lg:w-3/4 h-full md:h-full lg:h-[358px] shadow-xl rounded-lg p-8 gap-4">
             <div className="flex items-center justify-between">
               <div className="text-lg text-gray-950 font-bold">Contact</div>
-              <div className="w-10 h-10 rounded-full bg-orange-950 flex items-center justify-center mr-5 mb-2">
+              <div  onClick={handleEditClick} className="w-10 h-10 rounded-full bg-orange-950 flex items-center justify-center mr-5 mb-2 cursor-pointer">
                   <img src="/images/pensil.svg" alt="icon pensil" />
                 </div>
             </div>
@@ -206,7 +216,7 @@ const Profil = () => {
           <div className="flex flex-col items-center justify-center gap-4">
             <div className="flex flex-col items-center justify-center gap-4">
               <button onClick={handleUpdateProfile} className="w-full md:w-full lg:w-[330px] h-[60px] bg-[#6A4029] rounded-[20px] text-white font-bold">
-                Save Change
+              {isUpdating ? "Saving..." : "Save Change"}
               </button>
               <button className="w-full md:w-full lg:w-[330px] h-[60px] bg-[#FFBA33] rounded-[20px] text-[#6A4029] font-bold">
                 Cancel

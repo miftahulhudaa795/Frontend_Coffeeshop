@@ -92,7 +92,7 @@ const Navbar = () => {
                         </div>
                     }
                 </div>
-                <button onClick={() => setToggleNavbar(toggleNavbar ? false : true)} className='lg:hidden block'>
+                <button onClick={() => setToggleNavbar(toggleNavbar ? false : true)} className='hidden block'>
                   <img className='h-8 inline' src= {toggleNavbar ?  "/images/xmark-solid.svg": "/images/bars-solid.svg"} alt=''/>
                 </button>
               </div> :

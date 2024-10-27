@@ -1,21 +1,21 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState} from 'react'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
-import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { formatCurrency } from '../../helpers/formatter'
 import { RiLoader2Fill } from 'react-icons/ri'
-import { CartContext } from '../../context/CartContext'
+import { useNavigate, useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 const Details = () => {
+    const token = localStorage.getItem(`token`);
     const params = useParams()
     const id =params?.id
     const [product, setProduct] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
-    const { addToCart } = useContext(CartContext)
     const [count, setCount] = useState(1)
-    const [deliveryTime, setDeliveryTime] = useState('')
+    const [size, setSize] = useState('R')
+    const [deliveryMethod, setDeliveryMethod] = useState('Dine In')
     const navigate = useNavigate()
 
     const getProductDetails = async () => {
@@ -29,34 +29,45 @@ const Details = () => {
         setIsLoading(false)
     }
 
-    const handleAddToCart = () => {
-        if (product) {
-            const newCartItem = {
-                ...product,
-                quantity: 1,
-                size: 'L', 
-            }
-            addToCart(newCartItem)
-            Swal.fire({
-                title: "Success",
-                text: 'Product added to cart!',
-                icon: "success",
-            })
-        }
-    }
-
-    const handleAskStaff = () => {
-        alert('Redirecting to customer service...')
-    }
-
-    const handleCheckout = () => {
-        navigate('/cart') 
-    }
 
     useEffect(() => {
         getProductDetails()
     }, [])
 
+    const addToCart = async () => {
+        
+        const cartItem = {
+            productId: id,
+            size : product?.size,
+            deliveryMethod,
+        }
+        console.log({cartItem});
+        
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_HOST}/transaction`, cartItem, {
+               
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            if (response?.status === 200) {
+                alert(`${product?.name} added to cart`)
+            }
+        } catch (error) {
+            console.log(error);
+            Swal.fire("Failed to add item to cart. Please try again.")
+            
+        }
+    }
+
+    useEffect(() => {
+        addToCart()
+    }, [])
+
+    const checkout = () => {
+        navigate('/cart') 
+    }
   
    
   return (
@@ -82,30 +93,30 @@ const Details = () => {
                                 <div className="flex flex-col items-center justify-center text-center gap-4">
                                     <label className='font-bold text-xl' htmlFor="">Choose a size</label>
                                     <div className="flex flex-row gap-12">
-                                        <div className="flex items-center justify-center w-[60px] h-[60px] text-2xl font-bold rounded-full bg-[#FFBA33]">R</div>
-                                        <div className="flex items-center justify-center w-[60px] h-[60px] text-2xl font-bold rounded-full bg-[#FFBA33]">L</div>
-                                        <div className="flex items-center justify-center w-[60px] h-[60px] text-2xl font-bold rounded-full bg-[#FFBA33]">XL</div>
+                                        {['R', 'L', 'XL'].map(s => (
+                                            <div key={s} onClick={() => setSize(s)} className={`flex items-center justify-center w-[60px] h-[60px] text-2xl font-bold rounded-full ${size === s ? 'bg-[#FFBA33]' : 'bg-gray-300'} cursor-pointer `}>{s}</div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className=" flex flex-col gap-4 items-center py-8">
-                            <button onClick={handleAddToCart} className='w-[388px] h-[85px] bg-orange-950 rounded-3xl text-white font-bold text-xl'>Add to Cart</button>
-                            <button onClick={handleAskStaff} className='w-[388px] h-[85px] bg-[#FFBA33] rounded-3xl font-bold text-xl '>Ask a Staff</button>
+                            <button onClick={addToCart} className='w-[388px] h-[85px] bg-orange-950 rounded-3xl text-white font-bold text-xl'>Add to Cart</button>
+                            <button className='w-[388px] h-[85px] bg-[#FFBA33] rounded-3xl font-bold text-xl '>Ask a Staff</button>
                         </div>
                         <div className=" flex flex-col justify-between py-8">
                             <div className="flex flex-col items-center text-center gap-8">
-                                <label className='font-bold text-xl' htmlFor="">Choose Delivery Methods</label>
+                                <label className='font-bold text-xl'>Choose Delivery Methods</label>
                                 <div className="flex flex-row gap-8">
-                                    <div className="flex items-center justify-center w-[110px] h-[49px] bg-white text-sm border-1 font-bold rounded-xl ">Dine in</div>
-                                    <div className="flex items-center justify-center w-[110px] h-[49px] bg-white text-sm border-1 font-bold rounded-xl ">Door Delivery</div>
-                                    <div className="flex items-center justify-center w-[110px] h-[49px] bg-white text-sm border-1 font-bold rounded-xl ">Pick up</div>
+                                    {['Dine In', 'Door Delivery', 'Pick Up'].map(d => (
+                                        <div key={d} onClick={() => setDeliveryMethod(d)} 
+                                        className={`flex items-center justify-center w-[110px] h-[49px] bg-white text-sm border-2 font-bold rounded-xl ${deliveryMethod === d ? 'border-orange-950' : ''} cursor-pointer`}>{d}</div>
+                                    ))}
                                 </div>
                                 <div className="flex flex-row gap-4">
                                     <label className='text-lg' htmlFor="">Set time :</label>
                                     <input className='w-[292.01px] outline-none bg-[#EFEEEE] border-b-2 border-[#9F9F9F]' type="text" placeholder='Enter the time you’ll arrived'
-                                    value={deliveryTime}
-                                    onChange={(e) => setDeliveryTime(e.target.value)} />
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -130,7 +141,7 @@ const Details = () => {
                                 }} className="flex items-center justify-center border-2 border-gray-500 hover:border-none hover:bg-orange-500 rounded-full font-bold text-lg w-[40px] h-[40px] cursor-pointer ">+</div>
                             </div>
                         </div>
-                        <div onClick={handleCheckout} className="flex items-center justify-center h-full w-[250px] rounded-3xl shadow-lg bg-orange-500 font-bold text-2xl cursor-pointer">CHECKOUT</div>
+                        <div onClick={checkout} className="flex items-center justify-center h-full w-[250px] rounded-3xl shadow-lg bg-orange-500 font-bold text-2xl cursor-pointer">CHECKOUT</div>
                     </div>
                 </div>
         }

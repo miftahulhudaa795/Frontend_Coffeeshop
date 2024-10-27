@@ -16,7 +16,6 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <CartProvider>
           <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/signin' element={<Signin/>}/>
@@ -28,7 +27,6 @@ function App() {
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/product/:id' element={<Details/>}/>
           </Routes>
-        </CartProvider>
       </BrowserRouter>
     </div>
   );
